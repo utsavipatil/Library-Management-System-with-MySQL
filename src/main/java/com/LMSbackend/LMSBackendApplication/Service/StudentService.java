@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class StudentService {
     @Autowired
     StudentRepository studentRepository;
+    CardService cardService;
 
     public String createTable(StudentRequestDTO studentRequestDTO){
         //Convert DTO to Entity
@@ -21,9 +22,7 @@ public class StudentService {
         student.setName(studentRequestDTO.getName());
         student.setEmail(studentRequestDTO.getEmail());
 
-        Card newCard = new Card();
-        newCard.setCardStatus(CardStatus.ACTIVATED);
-        newCard.setStudentInfo(student); //For new foreign key column
+        Card newCard =  cardService.createCard(student);
 
         student.setCard(newCard); //Bidirectional relation
 

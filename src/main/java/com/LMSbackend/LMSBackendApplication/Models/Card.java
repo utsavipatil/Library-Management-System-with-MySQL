@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "card")
 @Getter
@@ -21,4 +23,6 @@ public class Card {
     @JoinColumn
     private Student studentInfo;
 
+    @OneToMany(mappedBy = "card" , cascade = CascadeType.ALL)
+    private List<Book> booksIssued;
 }
